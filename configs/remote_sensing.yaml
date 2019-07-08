@@ -1,0 +1,5 @@
+DATA:
+  ROOT: 'datasets/rsv'
+  DATASET: 'rsv'
+
+OUTPUT_DIR: 'work_dirs/rsv'

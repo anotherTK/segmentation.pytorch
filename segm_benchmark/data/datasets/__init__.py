@@ -4,6 +4,7 @@ from .pascal_voc import VOCDataset
 from .cityscape import CityscapeDataset
 from .ade20k import ADE20KDataset
 from .pcontext import PContextDataset
+from .rsv import RSVDataset
 from .concat import ConcatDataset
 
 
@@ -13,6 +14,7 @@ _DATASETS = {
     'cityscape': CityscapeDataset,
     'ade20k': ADE20KDataset,
     'pcontext': PContextDataset,
+    'rsv': RSVDataset,
 }
 
 def get(name, **kwargs):
