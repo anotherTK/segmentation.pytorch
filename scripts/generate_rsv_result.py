@@ -33,8 +33,9 @@ def main(args):
             segmed_img = Image.open(os.path.join(args.test_r, filename))
             segmed_img = segmed_img.resize((s_w, s_h), Image.NEAREST)
             segmed_img = np.array(segmed_img)
-            c_idx = int(filename.split('_')[-1])
-            r_idx = int(filename.split('_')[-2])
+            _name = filename.split('.')[0]
+            c_idx = int(_name.split('_')[-1])
+            r_idx = int(_name.split('_')[-2])
             x = c_idx * args.stride
             y = r_idx * args.stride
             result_label[x:x + crop_size, y:y + crop_size] = segmed_img
@@ -45,9 +46,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Submit style results")
-    parser.add_argument('--test', default='./work_dirs/remote_sensing/test-a', help='test origin file')
+    parser.add_argument('--test', default='./work_dirs/remote_sensing/test_a', help='test origin file')
     parser.add_argument('--test-s', default='./datasets/rsv/images/test', help='test splited file')
-    parser.add_argument('--test-r', default='./work_dirs/rsv/inferece/rsv', help='test detected results')
+    parser.add_argument('--test-r', default='./work_dirs/rsv/inference/rsv', help='test detected results')
     parser.add_argument('--save', default='./work_dirs/remote_sensing/predicted')
     parser.add_argument('--crop_size', default=520)
     parser.add_argument('--stride', default=260)
