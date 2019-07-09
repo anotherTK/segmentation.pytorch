@@ -74,7 +74,7 @@ def main():
     checkpointer = Checkpointer(model, save_dir=output_dir)
     ckpt = cfg.MODEL.WEIGHT if args.ckpt is None else args.ckpt
     _ = checkpointer.load(ckpt, use_latest=args.ckpt is None)
-
+    dataset_name = cfg.DATA.DATASET
     if cfg.OUTPUT_DIR:
         output_folder = os.path.join(
             cfg.OUTPUT_DIR, "inference", dataset_name)
@@ -84,7 +84,7 @@ def main():
     inference(
         model,
         data_loader_val,
-        dataset_name=cfg.DATA.DATASET,
+        dataset_name=dataset_name,
         device=cfg.MODEL.DEVICE,
         output_folder=output_folder,
     )

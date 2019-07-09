@@ -1,4 +1,5 @@
-
+import torch
+import numpy as np
 
 def batch_pix_accuracy(output, target):
     """Batch Pixel Accuracy
