@@ -17,6 +17,7 @@ class RSVDataset(SegmentationDataset):
     def __getitem__(self, index):
         img = Image.open(self.images[index]).convert('RGB')
         if self.stage == 'test':
+            img = img.resize((self.crop_size, self.crop_size))
             if self.transform is not None:
                 img, _ = self.transform(img, None)
             return img, self.images[index]
