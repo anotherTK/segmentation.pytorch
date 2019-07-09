@@ -6,7 +6,7 @@ import torch
 from segm_benchmark.config import cfg
 from segm_benchmark.data import make_data_loader
 from segm_benchmark.engine.inference import inference
-from segm_benchmark.modeling.detector import build_model
+from segm_benchmark.models import build_model
 from segm_benchmark.utils.checkpoint import Checkpointer
 from segm_benchmark.utils.comm import synchronize, get_rank
 from segm_benchmark.utils.logger import setup_logger
