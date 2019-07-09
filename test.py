@@ -63,7 +63,7 @@ def main():
     logger.info("Using {} GPUs".format(num_gpus))
     logger.info(cfg)
 
-    model = build_model(cfg)
+    model = build_model(cfg, jpu=False, lateral=False)
     model.to(cfg.MODEL.DEVICE)
 
     # Initialize mixed-precision if necessary
