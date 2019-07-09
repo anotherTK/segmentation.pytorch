@@ -69,6 +69,16 @@ def main():
     # Initialize mixed-precision if necessary
     use_mixed_precision = cfg.DTYPE == 'float16'
     amp_handle = amp.init(enabled=use_mixed_precision)
+    amp_opt_level = 'O1' if use_mixed_precision else 'O0'
+    model = amp.initialize(model, opt_level=amp_opt_level)
+
+    if distributed:
+        model = torch.nn.parallel.DistributedDataParallel(
+            model, device_ids=[local_rank], output_device=local_rank,
+            # this should be removed if we update BatchNorm stats
+            broadcast_buffers=False,
+            find_unused_parameters=True,
+        )
 
     output_dir = cfg.OUTPUT_DIR
     checkpointer = Checkpointer(model, save_dir=output_dir)
