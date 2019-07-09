@@ -74,7 +74,7 @@ def main():
 
     if distributed:
         model = torch.nn.parallel.DistributedDataParallel(
-            model, device_ids=[local_rank], output_device=local_rank,
+            model, device_ids=[args.local_rank], output_device=args.local_rank,
             # this should be removed if we update BatchNorm stats
             broadcast_buffers=False,
             find_unused_parameters=True,
