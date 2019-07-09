@@ -35,7 +35,7 @@ class EncNet(SegmNet):
         if targets is not None:
             return dict(total_loss=self.loss(tuple(x), targets))
         else:
-            return tuple(x)
+            return x[0]
 
         
 class EncHead(nn.Module):

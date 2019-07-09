@@ -101,7 +101,49 @@ def p_train_val(args):
     print("There are {} images for validation".format(len(os.listdir(val_image_savepath))))
 
 def p_test(args):
-    pass
+    crop_size = args.crop_size
+    stride = args.stride
+
+    test_image_savepath = os.path.join(args.save, 'images', 'test')
+
+    if not os.path.exists(test_image_savepath):
+        os.makedirs(test_image_savepath)
+
+    images = os.listdir(os.path.join(args.root, 'test_a'))
+    images = sorted(images)
+
+    # [image name]_[row index]_[col index]
+    for image in images:
+        img = Image.open(os.path.join(args.root, 'test_a', image))
+        # TODO: Does the alpha channel helps?
+        img = img.convert("RGB")
+        img = np.array(img)
+        height, width, _ = img.shape
+
+        # split into small image patchs
+        r_num = (height - crop_size) // stride + 1
+        c_num = (width - crop_size) // stride + 1
+        for r_idx in range(r_num):
+            for c_idx in range(c_num):
+                x = c_idx * stride
+                y = r_idx * stride
+                crop_img = img[x:x + crop_size, y:y + crop_size]
+                try:
+                    gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
+                except:
+                    if crop_img is not None:
+                        print(crop_img.shape)
+                    continue
+                if gray_img.max() < 30:
+                    continue
+
+                image_name = image.split('.')[0] + "_{}_{}.png".format(r_idx, c_idx)
+
+                cv2.imwrite(os.path.join(
+                    test_image_savepath, image_name), crop_img)
+
+    total_samples = len(os.listdir(test_image_savepath))
+    print("There are {} valid images for test".format(total_samples))
 
 
 if __name__ == "__main__":

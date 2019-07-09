@@ -84,7 +84,6 @@ def run_val(cfg, model, distributed):
     if distributed:
         model = model.module
     torch.cuda.empty_cache()  # TODO check if it helps
-    output_folders = [None] * len(cfg.DATASETS.TEST)
     if cfg.OUTPUT_DIR:
         output_folder = os.path.join(
             cfg.OUTPUT_DIR, "inference", dataset_name)

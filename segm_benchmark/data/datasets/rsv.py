@@ -19,7 +19,7 @@ class RSVDataset(SegmentationDataset):
         if self.stage == 'test':
             if self.transform is not None:
                 img, _ = self.transform(img, None)
-            return img, None
+            return img, None, self.images[index]
 
         mask = Image.open(self.masks[index])
         if self.stage == 'train':
@@ -33,7 +33,7 @@ class RSVDataset(SegmentationDataset):
         if self.transform is not None:
             img, mask = self.transform(img, mask)
 
-        return img, mask
+        return img, mask, self.images[index]
     
     def __len__(self):
         return len(self.images)
@@ -55,10 +55,13 @@ class RSVDataset(SegmentationDataset):
                 len(img_paths), img_folder))
             return img_paths, mask_paths
 
-        assert self.stage in ['train', 'val', 'test']
-        img_folder = os.path.join(self.root, 'images', self.stage)
-        mask_folder = os.path.join(self.root, 'annotations', self.stage)
-        img_paths, mask_paths = get_path_pairs(img_folder, mask_folder)
+        if self.stage in ['train', 'val']:
+            img_folder = os.path.join(self.root, 'images', self.stage)
+            mask_folder = os.path.join(self.root, 'annotations', self.stage)
+            img_paths, mask_paths = get_path_pairs(img_folder, mask_folder)
+        else:
+            img_paths = os.listdir(os.path.join(self.root, 'images', self.stage))
+            mask_paths = []
         return img_paths, mask_paths
 
         
