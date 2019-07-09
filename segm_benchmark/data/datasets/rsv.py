@@ -19,7 +19,7 @@ class RSVDataset(SegmentationDataset):
         if self.stage == 'test':
             if self.transform is not None:
                 img, _ = self.transform(img, None)
-            return img, None, self.images[index]
+            return img, self.images[index]
 
         mask = Image.open(self.masks[index])
         if self.stage == 'train':
