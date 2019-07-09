@@ -29,6 +29,7 @@ def _save_mask(image_ids, outputs, output_folder=None):
         for img_id, result in zip(image_ids, predict):
             _name = os.path.basename(img_id).split('.')[0] + '.png'
             cv2.imwrite(os.path.join(output_folder, _name), result)
+        print(_name)
 
 
 def compute_on_dataset(model, data_loader, device, timer=None, output_folder=None):
