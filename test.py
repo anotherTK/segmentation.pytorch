@@ -68,7 +68,7 @@ def main():
 
     # Initialize mixed-precision if necessary
     use_mixed_precision = cfg.DTYPE == 'float16'
-    amp_handle = amp.init(enabled=use_mixed_precision, verbose=cfg.AMP_VERBOSE)
+    amp_handle = amp.init(enabled=use_mixed_precision)
 
     output_dir = cfg.OUTPUT_DIR
     checkpointer = Checkpointer(model, save_dir=output_dir)
