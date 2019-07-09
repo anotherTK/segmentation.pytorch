@@ -13,9 +13,9 @@ from ..utils.comm import synchronize
 from ..utils.timer import Timer, get_time_str
 from segm_benchmark.utils.metrics import batch_intersection_union, batch_pix_accuracy
 
-def _evaluate(pred, target):
+def _evaluate(pred, target, nclass):
     correct, labeled = batch_pix_accuracy(pred, target)
-    inter, union = batch_intersection_union(pred, target, self.nclass)
+    inter, union = batch_intersection_union(pred, target, nclass)
     return correct, labeled, inter, union
 
 
@@ -31,7 +31,7 @@ def compute_on_dataset(model, data_loader, device, timer=None):
                 timer.tic()
             outputs = model(images.to(device))
             if targets is not None:
-                metr = _evaluate(outputs, targets.to(device))
+                metr = _evaluate(outputs, targets.to(device), model.nclass)
                 results_metr.append(metr)
             if timer:
                 if not cfg.MODEL.DEVICE == 'cpu':
