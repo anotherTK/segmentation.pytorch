@@ -55,7 +55,7 @@ def compute_on_dataset(model, data_loader, device, timer=None, output_folder=Non
                     torch.cuda.synchronize()
                 timer.toc()
         #    outputs = [o.to(cpu_device) for o in outputs]
-            _save_mask(image_ids, outputs)
+            _save_mask(image_ids, outputs, output_folder)
         #results_dict.update(
         #    {img_id: result for img_id, result in zip(image_ids, outputs)}
         #)
