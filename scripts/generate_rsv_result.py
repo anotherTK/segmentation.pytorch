@@ -38,7 +38,7 @@ def main(args):
             r_idx = int(_name.split('_')[-2])
             x = c_idx * args.stride
             y = r_idx * args.stride
-            result_label[x:x + crop_size, y:y + crop_size] = segmed_img
+            result_label[x:x + args.crop_size, y:y + args.crop_size] = segmed_img
 
         cv2.imwrite(save_path, result_label)
         
