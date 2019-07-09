@@ -5,6 +5,7 @@ import os
 
 import torch
 from tqdm import tqdm
+import numpy as np
 
 from segm_benchmark.config import cfg
 from ..utils.comm import is_main_process, get_world_size
