@@ -60,7 +60,8 @@ class RSVDataset(SegmentationDataset):
             mask_folder = os.path.join(self.root, 'annotations', self.stage)
             img_paths, mask_paths = get_path_pairs(img_folder, mask_folder)
         else:
-            img_paths = os.listdir(os.path.join(self.root, 'images', self.stage))
+            img_folder = os.path.join(self.root, 'images', self.stage)
+            img_paths = [os.path.join(img_folder, e) for e in os.listdir(img_folder)]
             mask_paths = []
         return img_paths, mask_paths
 
