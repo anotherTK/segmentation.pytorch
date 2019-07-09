@@ -25,6 +25,7 @@ def _save_mask(image_ids, outputs, output_folder=None):
     if output_folder:
         _, predict = torch.max(outputs, 1)
         predict = predict.cpu().numpy().astype('int64')
+        predict = [e for e in predict]
         for img_id, result in zip(image_ids, predict):
             _name = os.path.basename(img_id).split('.')[0] + '.png'
             cv2.imwrite(os.path.join(output_folder, _name), result)
