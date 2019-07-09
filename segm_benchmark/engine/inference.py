@@ -3,6 +3,7 @@ import logging
 import time
 import os
 
+import cv2
 import torch
 from tqdm import tqdm
 import numpy as np
@@ -20,7 +21,16 @@ def _evaluate(pred, target, nclass):
     return correct, labeled, inter, union
 
 
-def compute_on_dataset(model, data_loader, device, timer=None):
+def _save_mask(image_ids, outputs, output_folder=None):
+    if output_folder:
+        _, predict = torch.max(outputs, 1)
+        predict = predict.cpu().numpy().astype('int64')
+        for img_id, result in zip(image_ids, predict):
+            _name = os.path.basename(img_id).split('.')[0] + '.png'
+            cv2.imwrite(os.path.join(output_folder, _name), result)
+
+
+def compute_on_dataset(model, data_loader, device, timer=None, output_folder=None):
     model.eval()
     results_dict = {}
     results_metr = []
@@ -42,10 +52,11 @@ def compute_on_dataset(model, data_loader, device, timer=None):
                 if not cfg.MODEL.DEVICE == 'cpu':
                     torch.cuda.synchronize()
                 timer.toc()
-            outputs = [o.to(cpu_device) for o in outputs]
-        results_dict.update(
-            {img_id: result for img_id, result in zip(image_ids, outputs)}
-        )
+        #    outputs = [o.to(cpu_device) for o in outputs]
+            _save_mask(image_ids, outputs)
+        #results_dict.update(
+        #    {img_id: result for img_id, result in zip(image_ids, outputs)}
+        #)
     return results_dict, results_metr
 
 
@@ -108,7 +119,7 @@ def inference(
     inference_timer = Timer()
     total_timer.tic()
     predictions, metrs = compute_on_dataset(
-        model, data_loader, device, inference_timer)
+        model, data_loader, device, inference_timer, output_folder)
     # wait for all processes to complete before measuring the time
     synchronize()
     total_time = total_timer.toc()
