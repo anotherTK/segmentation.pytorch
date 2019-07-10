@@ -50,7 +50,7 @@ def p_train_val(args):
             for c_idx in range(c_num):
                 x = c_idx * stride
                 y = r_idx * stride
-                crop_img = img[x:x + crop_size, y:y + crop_size]
+                crop_img = img[y:y + crop_size, x:x + crop_size]
                 gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
                 if gray_img.max() < 30:
                     continue
@@ -121,7 +121,7 @@ def p_test(args):
             for c_idx in range(c_num):
                 x = c_idx * stride
                 y = r_idx * stride
-                crop_img = img[x:x + crop_size, y:y + crop_size]
+                crop_img = img[y:y + crop_size, x:x + crop_size]
                 gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
                 if gray_img.max() < 30:
                     continue
