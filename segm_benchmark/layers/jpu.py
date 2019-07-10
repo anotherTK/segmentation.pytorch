@@ -68,7 +68,7 @@ class JPU(nn.Module):
             self.conv4(inputs[-2]),
             self.conv3(inputs[-3])
         ]
-        _, _, h, w = feats.size()
+        _, _, h, w = feats[-1].size()
         feats[-2] = F.upsample(feats[-2], (h, w), **self.up_kwargs)
         feats[-3] = F.upsample(feats[-3], (h, w), **self.up_kwargs)
         feat = torch.cat(feats, dim=1)
