@@ -51,8 +51,8 @@ if __name__ == "__main__":
     parser.add_argument('--test-s', default='./datasets/rsv/images/test', help='test splited file')
     parser.add_argument('--test-r', default='./work_dirs/rsv/inference/rsv', help='test detected results')
     parser.add_argument('--save', default='./work_dirs/remote_sensing/predicted')
-    parser.add_argument('--crop_size', default=520)
-    parser.add_argument('--stride', default=260)
+    parser.add_argument('--crop_size', type=int, default=520)
+    parser.add_argument('--stride', type=int, default=260)
 
     args = parser.parse_args()
     if not os.path.exists(args.save):
