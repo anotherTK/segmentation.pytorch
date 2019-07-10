@@ -4,7 +4,7 @@ import torch
 
 
 def trim(model_state, keys):
-    true_keys = model_state.keys()
+    true_keys = list(model_state.keys())
     poped_keys = []
     for key in keys:
         for true_key in true_keys:
