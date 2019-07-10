@@ -10,8 +10,8 @@ import shutil
 Image.MAX_IMAGE_PIXELS = 100000000000
 
 def p_train_val(args):
-    crop_size = args.crop_size
-    stride = args.stride
+    crop_size = int(args.crop_size)
+    stride = int(args.stride)
 
     train_image_savepath = os.path.join(args.save, 'images', 'train')
     val_image_savepath = os.path.join(args.save, 'images', 'val')
@@ -72,7 +72,7 @@ def p_train_val(args):
 
     # choose the validation set
     # TODO bugs: if stride < crop_size, validation set would share some areas with train set. ---> only used for validating the algorithm with stride=crop_size case
-    split_ratio = args.ratio
+    split_ratio = float(args.ratio)
 
     val_num = int(total_samples * split_ratio)
     stride_num = 1 if stride >= crop_size else ((crop_size - 1) // stride + 1)
@@ -101,8 +101,8 @@ def p_train_val(args):
     print("There are {} images for validation".format(len(os.listdir(val_image_savepath))))
 
 def p_test(args):
-    crop_size = args.crop_size
-    stride = args.stride
+    crop_size = int(args.crop_size)
+    stride = int(args.stride)
 
     test_image_savepath = os.path.join(args.save, 'images', 'test')
 
