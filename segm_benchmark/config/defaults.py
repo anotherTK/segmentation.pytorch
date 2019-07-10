@@ -10,6 +10,8 @@ _C.DTYPE = "float32"
 _C.MODEL = CN()
 _C.MODEL.NET = "encnet"
 _C.MODEL.BACKBONE = "resnet50"
+_C.MODEL.JPU = False
+_C.MODEL.LATERAL = False
 _C.MODEL.DEVICE = "cuda"
 _C.MODEL.WEIGHT = ""
 

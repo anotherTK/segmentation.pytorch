@@ -24,7 +24,7 @@ except ImportError:
 
 
 def train(cfg, local_rank, distributed):
-    model = build_model(cfg, jpu=False, lateral=False)
+    model = build_model(cfg, jpu=cfg.MODEL.JPU, lateral=cfg.MODEL.LATERAL)
     device = torch.device(cfg.MODEL.DEVICE)
     model.to(device)
 
