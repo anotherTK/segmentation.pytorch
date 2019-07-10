@@ -17,9 +17,10 @@ def trim(model_state, keys):
 
 if __name__ == "__main__":
     
-    model = torch.load('work_dirs/pretrained/encnet_jpu_resnet101_pcontext.pth', map_location='cpu')
+    model = torch.load('work_dirs/pretrained/encnet_jpu_res101_pcontext.pth.tar', map_location='cpu')
 
-    model_state = trim(model['model'], ['head.encmodule.selayer', 'head.conv6', 'auxlayer'])
+    model_state = trim(model['state_dict'], ['head.encmodule.selayer', 'head.conv6', 'auxlayer'])
     
-    model['model'] = model_state
-    torch.save(model, 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth')
+    trimed_model = {}
+    trimed_model['model'] = model_state
+    torch.save(trimed_model, 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth')
