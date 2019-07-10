@@ -3,6 +3,7 @@ import os
 import argparse
 from PIL import Image
 import numpy as np
+import cv2
 
 Image.MAX_IMAGE_PIXELS = 100000000000
 
