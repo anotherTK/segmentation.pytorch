@@ -54,7 +54,7 @@ def p_train_val(args):
                 gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
                 if gray_img.max() < 30:
                     continue
-                crop_lbl = lbl[x:x + crop_size, y:y + crop_size]
+                crop_lbl = lbl[y:y + crop_size, x:x + crop_size]
                 image_name = image.split('.')[0] + "_{}_{}.png".format(r_idx, c_idx)
                 label_name = image_name.split('.')[0] + "_label.png"
 
