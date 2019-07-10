@@ -6,6 +6,5 @@ MODEL:
   WEIGHT: 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth'
   BACKBONE: 'resnet101'
   JPU: True
-  LATERAL: True
 
 OUTPUT_DIR: 'work_dirs/rsv'
