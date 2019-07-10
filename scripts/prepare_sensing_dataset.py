@@ -51,12 +51,9 @@ def p_train_val(args):
                 x = c_idx * stride
                 y = r_idx * stride
                 crop_img = img[x:x + crop_size, y:y + crop_size]
-                try:
-                    gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
-                except:
-                    if crop_img is not None:
-                        print(crop_img.shape)
+                if crop_img is None:
                     continue
+                gray_img = cv2.cvtColor(crop_img, cv2.COLOR_RGB2GRAY)
                 if gray_img.max() < 30:
                     continue
 

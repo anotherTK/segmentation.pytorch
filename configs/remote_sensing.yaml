@@ -2,4 +2,8 @@ DATA:
   ROOT: 'datasets/rsv'
   DATASET: 'rsv'
 
+MODEL:
+  WEIGHT: 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext.pth'
+  BACKBONE: 'resnet101'
+
 OUTPUT_DIR: 'work_dirs/rsv'
