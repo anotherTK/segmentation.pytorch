@@ -4,6 +4,10 @@ DATA:
   BASE_SIZE: 520
   CROP_SIZE: 480
 
+SOLVER:
+  STEPS: [9000, 15000]
+  MAX_ITER: 17000
+
 MODEL:
   WEIGHT: 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth'
   BACKBONE: 'resnet101'
