@@ -1,8 +1,8 @@
 DATA:
   ROOT: 'datasets/rsv'
   DATASET: 'rsv'
-  BASE_SIZE: 1000
-  CROP_SIZE: 960
+  BASE_SIZE: 520
+  CROP_SIZE: 480
 
 MODEL:
   WEIGHT: 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth'
