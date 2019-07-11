@@ -4,9 +4,15 @@ DATA:
   BASE_SIZE: 1000
   CROP_SIZE: 960
 
+SOLVER:
+  IMS_PER_GPU: 2
+  STEPS: [9000, 15000]
+  MAX_ITER: 17000
+
 MODEL:
   WEIGHT: 'work_dirs/pretrained/encnet_jpu_resnet101_pcontext_trimed.pth'
   BACKBONE: 'resnet101'
   JPU: True
-
+TEST:
+  IMS_PER_GPU: 2
 OUTPUT_DIR: 'work_dirs/rsv'

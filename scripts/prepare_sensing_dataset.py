@@ -140,9 +140,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Split into small images")
     parser.add_argument('--root', default='work_dirs/remote_sensing/')
     parser.add_argument('--save', default='datasets/rsv')
-    parser.add_argument('--crop-size', default=520)
-    parser.add_argument('--stride', default=260)
-    parser.add_argument('--ratio', default=0.02)
+    parser.add_argument('--crop-size', type=int ,default=520)
+    parser.add_argument('--stride', type=int, default=260)
+    parser.add_argument('--ratio', type=float, default=0.02)
 
     args = parser.parse_args()
 
