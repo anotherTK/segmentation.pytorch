@@ -11,4 +11,3 @@ Thanks to mask-rcnn-benchmark group and the following algorithms authors.
 
 ## TroubleShoot
 
-1. the same data input, get different output when testing?
